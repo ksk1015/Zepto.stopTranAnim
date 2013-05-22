@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Zepto.stopTranAnim demo</title>
+<style type="text/css">
+#animElem {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0px;
+    height: 0px;
+    background: gray;
+}
+</style>
+</head>
+<body>
+<h1>Zepto.stopTranAnim demo</h1>
+<button id="btnAnimate">animate</button><br>
+<br>
+<button id="btnStop"> stop </button><br>
+<label><input type="checkbox" id="jumpToEnd">jumpToEnd</label><br>
+<label><input type="checkbox" id="cancelCallback">cancelCallback</label>
+
+
+<div id="animElem"></div>
+
+<script src="zepto.js"></script>
+<script src="../zepto.stoptrananim.js"></script>
+
+<script type="text/javascript">
+$("#btnAnimate").click(function(){
+
+  var ranInt = function(min, max){
+    return Math.random()*(max-min)|0 + min
+  }
+
+  $("#animElem").animate({
+    backgroundColor: "rgb("+ranInt(0,255)+","+ranInt(0,255)+","+ranInt(0,255)+")",
+    width: ranInt(10,50) + "px",
+    height: ranInt(10,50) + "px",
+    translate: ranInt(0,400) + "px, " + ranInt(0,400) + "px",
+    rotate: ranInt(0,360) + "deg",
+    scale: Math.random()*3
+  }, ranInt(1000,5000), "ease", function(){
+    alert("animate end")
+  })
+
+})
+
+$("#btnStop").click(function(){
+
+  var jumpToEnd = $("#jumpToEnd").is(":checked")
+  var cancelCallback = $("#cancelCallback").is(":checked")
+  $("#animElem").stopTranAnim(jumpToEnd, cancelCallback)
+
+})
+</script>
+</body>
+</html>
